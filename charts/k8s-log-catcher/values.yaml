@@ -16,9 +16,9 @@ fullnameOverride: ""
 # Configures the log catcher.
 config:
   namespace: "default"
-  labels:
-  - app.kubernetes.io/instance=my-instance
-  - app.kubernetes.io/name=flightdeck-web
+  labels: []
+  # - app.kubernetes.io/instance=my-instance
+  # - app.kubernetes.io/name=flightdeck-web
   logPath: "/data"
   logFilePrefix: ""
   logCaptureSeconds: "21600"

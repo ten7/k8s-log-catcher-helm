@@ -24,6 +24,18 @@ spec:
           serviceAccountName: {{ include "k8s-log-catcher.serviceAccountName" . }}
           securityContext:
             {{- toYaml .Values.podSecurityContext | nindent 12 }}
+        {{- if .Values.persistence.enabled }}
+          initContainers:
+            - name: fix-pvc-permissions
+              image: alpine
+              command:
+                - "sh"
+                - "-c"
+                - "chown -R 1000:1000 /data"
+              volumeMounts:
+                - name: data
+                  mountPath: /data
+        {{- end }}
           containers:
           - name: {{ .Chart.Name }}
             securityContext:
